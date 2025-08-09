@@ -1,9 +1,11 @@
 "use client";
 import { useState } from "react";
 import { useBudget } from "../context/BudgetContext";
+import { useTheme } from "../context/ThemeContext";
 
 export default function Navigation({ currentPage, setCurrentPage }) {
   const { paymentReminders } = useBudget();
+  const { theme, toggleTheme, setTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Count pending reminders
@@ -26,15 +28,13 @@ export default function Navigation({ currentPage, setCurrentPage }) {
   ];
 
   return (
-    <nav className="bg-white shadow-lg border-b border-gray-200">
+    <nav className="shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0 flex items-center">
               <span className="text-2xl font-bold text-blue-600">💰</span>
-              <span className="ml-2 text-xl font-semibold text-gray-900">
-                Budget Manager
-              </span>
+              <span className="ml-2 text-xl font-semibold">Budget Manager</span>
             </div>
           </div>
 
@@ -59,6 +59,29 @@ export default function Navigation({ currentPage, setCurrentPage }) {
                 )}
               </button>
             ))}
+
+            {/* Theme toggle */}
+            <div className="h-6 w-px bg-gray-300 mx-2" aria-hidden="true" />
+            <div className="flex items-center space-x-2">
+              <button
+                onClick={toggleTheme}
+                aria-label="Toggle theme"
+                title={theme === "dark" ? "Switch to light" : "Switch to dark"}
+                className="nav-link"
+              >
+                {theme === "dark" ? "🌙" : "☀️"}
+              </button>
+              <select
+                aria-label="Theme selection"
+                value={theme}
+                onChange={(e) => setTheme(e.target.value)}
+                className="select-field text-sm py-1"
+              >
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+                <option value="system">System</option>
+              </select>
+            </div>
           </div>
 
           {/* Mobile menu button */}
@@ -98,7 +121,7 @@ export default function Navigation({ currentPage, setCurrentPage }) {
       {/* Mobile Navigation */}
       {isMenuOpen && (
         <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-50">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navigationItems.map((item) => (
               <button
                 key={item.id}
@@ -121,6 +144,30 @@ export default function Navigation({ currentPage, setCurrentPage }) {
                 )}
               </button>
             ))}
+            <div className="px-2 pt-2">
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={() => {
+                    toggleTheme();
+                    setIsMenuOpen(false);
+                  }}
+                  aria-label="Toggle theme"
+                  className="nav-link"
+                >
+                  {theme === "dark" ? "🌙 Dark" : "☀️ Light"}
+                </button>
+                <select
+                  aria-label="Theme selection"
+                  value={theme}
+                  onChange={(e) => setTheme(e.target.value)}
+                  className="select-field text-sm py-1"
+                >
+                  <option value="light">Light</option>
+                  <option value="dark">Dark</option>
+                  <option value="system">System</option>
+                </select>
+              </div>
+            </div>
           </div>
         </div>
       )}

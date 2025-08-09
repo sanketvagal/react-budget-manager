@@ -197,7 +197,7 @@ export default function RecurringPayments() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className="card">
         <div className="flex justify-between items-center">
           <div>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -218,7 +218,7 @@ export default function RecurringPayments() {
 
       {/* Add/Edit Form */}
       {showForm && (
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="card">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">
             {editingPayment
               ? "Edit Recurring Payment"
@@ -357,7 +357,7 @@ export default function RecurringPayments() {
       )}
 
       {/* Recurring Payments List */}
-      <div className="bg-white rounded-lg shadow">
+      <div className="card">
         <div className="px-6 py-4 border-b border-gray-200">
           <h2 className="text-lg font-semibold text-gray-900">
             Your Recurring Payments
