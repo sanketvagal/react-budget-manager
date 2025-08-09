@@ -531,7 +531,7 @@ export default function CreditCardOffers() {
                         {offer.bankName}
                       </p>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-900">
                         <div>
                           <p>
                             <span className="font-medium">Offer Type:</span>{" "}
